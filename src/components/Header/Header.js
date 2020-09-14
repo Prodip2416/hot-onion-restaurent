@@ -1,15 +1,16 @@
 import React from 'react';
 import HeaderImg from '../../images/bannerbackground.png';
-import Container from '@material-ui/core/Container';
-
-
 
 const Header = () => {
     return (
-        <div className="banner">
-            <Container maxWidth="lg" >
-                <img src={HeaderImg} alt=""/>
-            </Container>
+        <div>
+            <div className="banner">
+                <img src={HeaderImg} alt="" />
+            </div>
+            {/* <div className="banner-input">
+                <input type="text" />
+                <button className="btn btn-primary">Search</button>      
+            </div> */}
         </div>
     );
 };
