@@ -7,7 +7,7 @@ import Switch from 'react-bootstrap/esm/Switch';
 import FoodDetail from './components/FoodDetail/FoodDetail';
 import CheckOut from './components/CheckOut/CheckOut';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
-import SignUp from './components/Login/SignUp';
+import Login from './components/Login/Login';
 import Navbar from './components/NavBar/Navbar';
 
 export const OnionContext = createContext();
@@ -19,7 +19,6 @@ function App() {
   return (
     <OnionContext.Provider value={{ user: [loggedInUser, setLoggedInUser], cartItem: [cart, setCart] }}>
       <Router>
-        <h1>Email: {loggedInUser.email}</h1>
         <Navbar />
         <Switch>
           <Route exact path="/">
@@ -33,14 +32,14 @@ function App() {
           <Route path="/FoodDetail/:id">
             <FoodDetail />
           </Route>
-          <PrivateRoute path="/checkout">
+          <Route path="/checkout">
             <CheckOut />
-          </PrivateRoute>
+          </Route>
           <Route path="/login">
-            <SignUp />
+            <Login />
           </Route>
           <Route path="/signup">
-            <SignUp />
+            <Login />
           </Route>
         </Switch>
       </Router>

@@ -4,6 +4,7 @@ import fakeData from '../../fakeDate/fakeData';
 import FoodItem from '../FoodItem/FoodItem';
 import { OnionContext } from '../../App';
 import WhyChoose from '../WhyChoose/WhyChoose';
+import Footer from '../Footer/Footer';
 
 
 const Menu = () => {
@@ -19,24 +20,27 @@ const Menu = () => {
     }, [category])
 
     return (
-        <div className="container text-center mt-5">
-            <nav>
-                <button className="btn btn-link mr-3" onClick={() => setCategory('BREAKFAST')}>Breakfast</button>
-                <button className="btn btn-link mr-3" onClick={() => setCategory('LUNCH')}>Lunch</button>
-                <button className="btn btn-link mr-3" onClick={() => setCategory('DINNER')}>Dinner</button>
-            </nav>
-            <div className="mt-4">
-                {
-                    selectedItem.map(item => <FoodItem key={item.id} food={item} />)
-                }
-            </div>
-            <div className="">
-                {
-                    cart.length ? <Link to="/checkout"> <button className="btn btn-danger mt-4">Checkout Your Food</button></Link>
-                        : <button className="btn btn-secondary mt-4" disabled>Checkout Your Food</button>
-                }
-            </div>           
-            <WhyChoose/>
+        <div >
+            <div className="container text-center mt-5">
+                <nav>
+                    <button className="btn btn-link mr-3" onClick={() => setCategory('BREAKFAST')}>Breakfast</button>
+                    <button className="btn btn-link mr-3" onClick={() => setCategory('LUNCH')}>Lunch</button>
+                    <button className="btn btn-link mr-3" onClick={() => setCategory('DINNER')}>Dinner</button>
+                </nav>
+                <div className="mt-4">
+                    {
+                        selectedItem.map(item => <FoodItem key={item.id} food={item} />)
+                    }
+                </div>
+                <div className="">
+                    {
+                        cart.length ? <Link to="/checkout"> <button className="btn btn-danger mt-4">Checkout Your Food</button></Link>
+                            : <button className="btn btn-secondary mt-4" disabled>Checkout Your Food</button>
+                    }
+                </div>
+                <WhyChoose />
+            </div>        
+            <Footer/>
         </div>
     );
 };

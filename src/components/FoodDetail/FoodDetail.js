@@ -48,7 +48,7 @@ const FoodDetail = () => {
                                 <div className="cart-item d-flex align-items-center mt-5">
                                     <h3>${product && product.price}</h3>
                                     <div className="input-group input-cart-item ml-4">
-                                        <button className="btn">
+                                        <button className="btn" onClick={handleChange}>
                                             <i className="fas fa-minus"></i>
                                         </button>
                                         <input type="text"

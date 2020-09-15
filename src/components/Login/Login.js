@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { OnionContext } from '../../App';
 import * as firebase from "firebase/app";
@@ -7,32 +7,41 @@ import firebaseConfig from './firebase.config';
 
 firebase.initializeApp(firebaseConfig);
 
-const SignUp = () => {
+const Login = () => {
     const { user } = useContext(OnionContext);
     const [loggedInUser, setLoggedInUser] = user;
     const [isUser, setIsUser] = useState(true);
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
-    const [newUser, setNewUser] = useState({ name: '', email: '', password: '' });
+    const [newUser, setNewUser] = useState({ name: '', email: '', password: '', confirmPassword: '' });
     let history = useHistory();
     let location = useLocation();
     let { from } = location.state || { from: { pathname: "/" } };
 
+    useEffect(()=>{
+       
+    },[])
+
     const handleSubmit = (e) => {
-        if (!isUser && newUser.email && newUser.password) {
-            firebase.auth().createUserWithEmailAndPassword(newUser.email, newUser.password)
-                .then(res => {
-                   // console.log(res);
-                    userInfoUpdate(newUser.name);
-                    newUser.displayName = newUser.name;
-                    setLoggedInUser(newUser);
-                    // history.push('/checkout');
-                    history.replace(from);
-                })
-                .catch(function (error) {
-                    setError(error.message);
-                });
-        } else if (isUser && newUser.email && newUser.password){
+        if (!isUser && newUser.email && newUser.password && newUser.confirmPassword) {
+            if (password === confirmPassword) {
+                firebase.auth().createUserWithEmailAndPassword(newUser.email, newUser.password)
+                    .then(res => {
+                        // console.log(res);
+                        userInfoUpdate(newUser.name);
+                        newUser.displayName = newUser.name;
+                        setLoggedInUser(newUser);
+                        // history.push('/checkout');
+                        history.replace(from);
+                    })
+                    .catch(function (error) {
+                        setError(error.message);
+                    });
+            } else {
+                setError('Password & Confirm Password does not match');
+            }
+        } else if (isUser && newUser.email && newUser.password) {
             firebase.auth().signInWithEmailAndPassword(newUser.email, newUser.password)
                 .then(res => {
                     setLoggedInUser(res.user);
@@ -56,7 +65,7 @@ const SignUp = () => {
         });
     }
 
-    const handleChange = (e) => {
+    const handleBlur = (e) => {
         let isValidForm = true;
         if (e.target.name === 'email') {
             isValidForm = /\S+@\S+\.\S+/.test(e.target.value);
@@ -77,25 +86,26 @@ const SignUp = () => {
                 setError('Password have at least one digit with five character long.');
             }
         }
-        if (e.target.name === 'confirmPassword') {
-            const greaterThanFive = e.target.value.length > 4;
-            const mustOneDigit = /\d{1}/.test(e.target.value);
-            isValidForm = greaterThanFive && mustOneDigit;
-            isValidForm = password === e.target.value;
-            if (isValidForm) {
+        if(e.target.name === 'confirmPassword') {    
+            console.log(e.target.name); 
+            setConfirmPassword(e.target.value);
+            if (password === confirmPassword) {
+                isValidForm = true;
                 setError('');
             } else {
+                isValidForm = false;
                 setError('Password & Confirm Password does not match');
             }
         }
+
         if (isValidForm) {
-            //console.log('successful')
             const user = { ...newUser };
             user[e.target.name] = e.target.value;
             setNewUser(user);
-        } else {
-            //console.log('something wrong')
-        }
+        } 
+    }
+    const handleAccount = () => {
+        setIsUser(false);
     }
     return (
         <div className="sign-up-img">
@@ -107,21 +117,21 @@ const SignUp = () => {
                     {
                         isUser ? <form className="mt-3 login-form" onSubmit={handleSubmit} >
                             {error && <p className="alert alert-danger m-3">{error}</p>}
-                            <input name="email" onChange={handleChange} className="form-control m-3" required type="email" placeholder="Email" />
-                            <input name="password" onChange={handleChange} className="form-control m-3" required type="password" placeholder="Password" />
+                            <input name="email" onBlur={handleBlur} className="form-control m-3" required type="email" placeholder="Email" />
+                            <input name="password" onBlur={handleBlur} className="form-control m-3" required type="password" placeholder="Password" />
                             <button type="submit" className="btn login-btn form-control m-3" >Log In</button>
-                              </form>
+                        </form>
                             : <form className="mt-3 login-form" onSubmit={handleSubmit} >
                                 {error && <p className="alert alert-danger m-3">{error}</p>}
-                                <input name="name" onChange={handleChange} className="form-control m-3" required type="name" placeholder="Name" />
-                                <input name="email" onChange={handleChange} className="form-control m-3" required type="email" placeholder="Email" />
-                                <input name="password" onChange={handleChange} className="form-control m-3" required type="password" placeholder="Password" />
-                                <input name="confirmPassword" onChange={handleChange} className="form-control m-3" required type="password" placeholder="Confirm Password" />
+                                <input name="name" onBlur={handleBlur} className="form-control m-3" required type="name" placeholder="Name" />
+                                <input name="email" onBlur={handleBlur} className="form-control m-3" required type="email" placeholder="Email" />
+                                <input name="password" onBlur={handleBlur} className="form-control m-3" required type="password" placeholder="Password" />
+                                <input name="confirmPassword" onBlur={handleBlur} onChange={handleBlur} className="form-control m-3" required type="password" placeholder="Confirm Password" />
                                 <button type="submit" className="btn login-btn form-control ml-3" >Sign Up</button>
                             </form>
                     }
                     {
-                        isUser ? <p className="text-center mt-2 text-danger" onClick={() => setIsUser(false)} style={{ cursor: 'pointer' }}>Don't have an account? Sign up</p>
+                        isUser ? <p className="text-center mt-2 text-danger" onClick={handleAccount} style={{ cursor: 'pointer' }}>Don't have an account? Sign up</p>
                             : <p className="text-center mt-2 text-danger" onClick={() => setIsUser(true)} style={{ cursor: 'pointer' }}>Already have an account?</p>
                     }
                 </div>
@@ -130,4 +140,4 @@ const SignUp = () => {
     );
 };
 
-export default SignUp;
+export default Login;

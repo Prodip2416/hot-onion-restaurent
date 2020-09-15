@@ -1,0 +1,23 @@
+input{
+    background-color: #fcf4f4 !important;
+}
+.save,.checkout input,h5,hr{
+    width:350px !important;
+}
+.place-order{
+    margin-left:200px;
+    width:400px !important;
+}
+.place-order-button{
+    margin-left:-20px;
+       width:400px;
+}
+.place-order-button-d{
+    margin-left:-20px;
+    width:400px;
+    cursor: not-allowed;
+    pointer-events: all;
+}
+.mar-left{
+    margin-left:-100px;
+}
