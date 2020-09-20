@@ -52,15 +52,15 @@ const OrderItem = () => {
                             </div>
                         </li>
                     }
-                    {
+                    {/* {
                         cart.length ? <li className="list-group-item">
-                            <button className="btn btn-danger place-order-button">Place Order</button>
+                            <button className="btn btn-danger place-order-button">Place Your Order</button>
                         </li>
                             :
                             <li className="list-group-item">
                                 <button className="btn btn-secondary place-order-button-d disabled">Place Your Order</button>
                             </li>
-                    }
+                    } */}
                 </ul>
 
             </div>

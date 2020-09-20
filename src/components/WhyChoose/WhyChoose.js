@@ -16,14 +16,14 @@ const WhyChoose = () => {
                 <p className="card-text" style={{ lineHeight: '5px' }}><small >mu is dagwood's at. Boy prosperous increasing surround</small></p>
             </div>
             <div className="card-group">
-                <div className="card m-3">
+                <div className="card m-3" style={{height:'90%'}}>
                     <img className="card-img-top" src={BargerMan} alt="Card" />
                     <div className="card-body">
                         <div className="d-flex">
                             <div>
                                 <img src={Group2} alt="" />
                             </div>
-                            <div>
+                            <div style={{ overflow: 'hidden' }}>
                                 <h5 className="card-title text-left m-2">Fast Delivery</h5>
                                 <p className="card-text text-left"><small>Keep your system om sync with automated web hook based notification each time link is paid and how we dream about our future</small></p>
                                 <h6 className="text-left">See more <i className="fas fa-arrow-right"></i> </h6>
@@ -36,7 +36,7 @@ const WhyChoose = () => {
                     <div className="card-body">
                         <div className="d-flex">
                             <div> <img src={Group3} alt="" /></div>
-                            <div>
+                            <div style={{ overflow: 'hidden' }}>
                                 <h5 className="card-title text-left m-2">A Good Auto Responder</h5>
                                 <p className="card-text text-left"><small>Keep your system om sync with automated web hook based notification each time link is paid and how we dream about our future</small></p>
                                 <h6 className="text-left">See more <i className="fas fa-arrow-right"></i> </h6>
@@ -44,13 +44,13 @@ const WhyChoose = () => {
                         </div>
                     </div>
                 </div>
-                <div className="card m-3">
+                <div className="card m-3" style={{ height: '90%' }}>
                     <img className="card-img-top" src={supplier} alt="Card" />
                     <div className="card-body">
 
                         <div className="d-flex">
                             <div><img src={Group1} alt="" /></div>
-                            <div>
+                            <div style={{ overflow: 'hidden' }}>
                                 <h5 className="card-title text-left m-2">Home Delivery</h5>
                                 <p className="card-text text-left"><small>Keep your system om sync with automated web hook based notification each time link is paid and how we dream about our future</small></p>
                                 <h6 className="text-left">See more <i className="fas fa-arrow-right"></i> </h6>

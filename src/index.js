@@ -3,11 +3,24 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { Provider as AlertProvider } from 'react-alert'
+import AlertTemplate from 'react-alert-template-basic'
+// npm install --save react-alert react-alert-template-basic
 
+const options = {
+  position: 'bottom center',
+  timeout: 2000,
+  offset: '250px',
+  transition: 'scale',
+  type: 'success'
+}
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <AlertProvider template={AlertTemplate} {...options} >
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </AlertProvider>
+  ,
   document.getElementById('root')
 );
 

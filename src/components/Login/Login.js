@@ -19,10 +19,7 @@ const Login = () => {
     let location = useLocation();
     let { from } = location.state || { from: { pathname: "/" } };
 
-    useEffect(()=>{
-       
-    },[])
-
+    
     const handleSubmit = (e) => {
         if (!isUser && newUser.email && newUser.password && newUser.confirmPassword) {
             if (password === confirmPassword) {

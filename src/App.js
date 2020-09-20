@@ -9,6 +9,7 @@ import CheckOut from './components/CheckOut/CheckOut';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import Login from './components/Login/Login';
 import Navbar from './components/NavBar/Navbar';
+import DeliveryLocation from './components/DeliveryLocation/DeliveryLocation';
 
 export const OnionContext = createContext();
 
@@ -32,14 +33,17 @@ function App() {
           <Route path="/FoodDetail/:id">
             <FoodDetail />
           </Route>
-          <Route path="/checkout">
+          <PrivateRoute path="/checkout">
             <CheckOut />
-          </Route>
+          </PrivateRoute>
+          <PrivateRoute path="/deliveryLocation">
+            <DeliveryLocation />
+          </PrivateRoute>
           <Route path="/login">
             <Login />
           </Route>
           <Route path="/signup">
-            <Login />
+              <Login/>
           </Route>
         </Switch>
       </Router>

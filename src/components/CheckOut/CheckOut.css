@@ -8,16 +8,16 @@ input{
     margin-left:200px;
     width:400px !important;
 }
-.place-order-button{
-    margin-left:-20px;
-       width:400px;
-}
-.place-order-button-d{
-    margin-left:-20px;
-    width:400px;
-    cursor: not-allowed;
-    pointer-events: all;
-}
 .mar-left{
     margin-left:-100px;
+}
+.place-btn{
+    margin-left:200px;
+}
+.place-order-button{
+    width:400px!important;
+}
+.place-order-button-d{
+      width:400px!important;
+     cursor: not-allowed !important;
 }

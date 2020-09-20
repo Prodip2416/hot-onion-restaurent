@@ -1,0 +1,16 @@
+.place{
+    background-color:lightgrey;  
+    border-radius: 5px;;
+}
+.line{
+    line-height:5px;
+}
+.location{
+    background-color:white;
+    border-radius:5px;
+    width:70%;
+    padding:10px 10px;
+}
+.contact{
+    width:70%;
+}

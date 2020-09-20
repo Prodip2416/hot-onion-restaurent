@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import fakeData from '../../fakeDate/fakeData';
 import { OnionContext } from '../../App';
+import { useAlert } from 'react-alert';
 
 const FoodDetail = () => {
     const { id } = useParams();
@@ -11,6 +12,7 @@ const FoodDetail = () => {
     const [loggedInUser, setLoggedInUser] = user;
     const [cart, setCart] = cartItem;
     const [cartItemCount, setCartItemCount] = useState(0);
+    const alert = useAlert();
 
     useEffect(() => {
         const item = fakeData.find(food => food.id === parseInt(id));
@@ -18,12 +20,14 @@ const FoodDetail = () => {
     }, [id]);
 
     const handleAdd = () => {
-        const newItem = { ...product };
-        newItem.quantity = cartItemCount;
-        const totalItem = [newItem, ...cart];
-        setCart(totalItem);
-        setCartItemCount(0);
-        history.push('/');
+        if (cartItemCount > 0){
+            const newItem = { ...product };
+            newItem.quantity = cartItemCount;
+            const totalItem = [newItem, ...cart];
+            setCart(totalItem);
+            setCartItemCount(0);
+            alert.show(<div style={{ color: '#F19C74', backgroundColor:'#F5F7F0 ',textAlign:'center' }}>Item added</div>);
+        }      
     }
     const handleChange = () => {
         if (cartItemCount > 0) {
