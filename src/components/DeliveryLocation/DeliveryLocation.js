@@ -3,9 +3,8 @@ import './DeliveryLocation.css';
 import { OnionContext } from '../../App';
 
 const DeliveryLocation = () => {
-    const { user, cartItem } = useContext(OnionContext);
+    const { user } = useContext(OnionContext);
     const [loggedInUser, setLoggedInUser] = user;
-    const [cart, setCart] = cartItem;
     return (
         <div className="container">
             <div className="row">
@@ -29,7 +28,7 @@ const DeliveryLocation = () => {
                         </div>
                         <div className="ml-4 mb-4">
                             <div className="location">
-                                <p className="mt-3">Hello, Mr/Mrs {loggedInUser.displayName} </p>
+                                <p className="mt-3">Hello, Mr/Mrs <b>{loggedInUser && loggedInUser.displayName}</b></p>
                             </div>
                             <button className="btn btn-danger mt-2 mb-2 contact">Contact</button>
                         </div>
