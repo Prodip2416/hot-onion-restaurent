@@ -7,31 +7,37 @@ const OrderItem = () => {
     const [loggedInUser, setLoggedInUser] = user;
     const [cart, setCart] = cartItem;
 
-    const [subTotal, setSubTotal] = useState(0);
-    const [totalQuantity, setTotalQuantity] = useState(0);
-    const [tax, setTax] = useState(2.5);
-    const [delivery, setDelivery] = useState(5.00);
-    const [totalAmount, setTotalAmount] = useState(0);
+    // const [subTotal, setSubTotal] = useState(0);
+    // const [totalQuantity, setTotalQuantity] = useState(0);
+    // const [tax, setTax] = useState(2.5);
+    // const [delivery, setDelivery] = useState(5.00);
+    // const [totalAmount, setTotalAmount] = useState(0);
+
+    // useEffect(() => {
+    //     const getSubTotal = cart.reduce((sum, cartItem) => sum + cartItem.price * cartItem.quantity, 0);
+    //     setSubTotal(getSubTotal);
+    //     const getTotalQuantity = cart.reduce((sum, cartItem) => sum + cartItem.quantity, 0);
+    //     setTotalQuantity(getTotalQuantity);
+    //     const getTotalAmount = subTotal + tax + delivery;
+    //     setTotalAmount(getTotalAmount);
+    // }, [cart, subTotal, delivery, tax])
 
     const convertToFixed = (number) => {
         return number.toFixed(2);
     }
 
-    useEffect(() => {
-        const getSubTotal = cart.reduce((sum, cartItem) => sum + cartItem.price * cartItem.quantity, 0);
-        setSubTotal(getSubTotal);
-        const getTotalQuantity = cart.reduce((sum, cartItem) => sum + cartItem.quantity, 0);
-        setTotalQuantity(getTotalQuantity);
-        const getTotalAmount = subTotal + tax + delivery;
-        setTotalAmount(getTotalAmount);
-    }, [cart, subTotal, delivery, tax])
+    const subTotal = cart.reduce((sum, cartItem) => sum + cartItem.price * cartItem.quantity, 0);
+    const totalQuantity = cart.reduce((sum, cartItem) => sum + cartItem.quantity, 0);
+    const tax = 2.5;
+    const delivery = 5.00;
+    const totalAmount = subTotal + tax + delivery;
 
     return (
         <div>
             <div className="place-order">
                 <ul className="list-group">
                     {
-                        cart.map(item => <li className="list-group-item" key={item.id + new Date()}>
+                        cart.map(item => <li className="list-group-item" key={item.id + Math.random()}>
                             <div className="row">
                                 <div className="col-md-4 mt-3">
                                     <img className="w-75 img img-responsive" src={item.url} alt="" />

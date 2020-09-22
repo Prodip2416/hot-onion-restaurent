@@ -3,6 +3,7 @@ import { Link, useHistory, useParams } from 'react-router-dom';
 import fakeData from '../../fakeDate/fakeData';
 import { OnionContext } from '../../App';
 import { useAlert } from 'react-alert';
+import './FoodDetail.css';
 
 const FoodDetail = () => {
     const { id } = useParams();
@@ -58,7 +59,7 @@ const FoodDetail = () => {
                                         <input type="text"
                                             value={cartItemCount}
                                             onChange={handleChange}
-                                            className="text-center"
+                                            className="text-center food-input"
                                             style={{ width: '100px', borderRadius: '30px' }}
                                         />
                                         <button className="btn" onClick={() => setCartItemCount(cartItemCount + 1)}>

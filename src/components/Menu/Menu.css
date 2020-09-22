@@ -1,0 +1,10 @@
+.menu-btn{
+    color: #e51a4b;
+  border-bottom: 2px solid #e51a4b !important;
+}
+.btn-ctg:focus {   
+    box-shadow: none;
+}
+.btn-ctg:hover {   
+   color: #e51a4b;
+}

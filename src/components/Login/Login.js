@@ -4,6 +4,7 @@ import { OnionContext } from '../../App';
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import firebaseConfig from './firebase.config';
+import './Login.css'
 
 firebase.initializeApp(firebaseConfig);
 
@@ -18,7 +19,26 @@ const Login = () => {
     let history = useHistory();
     let location = useLocation();
     let { from } = location.state || { from: { pathname: "/" } };
+    const googleProvider = new firebase.auth.GoogleAuthProvider();
 
+    // all function is here...
+    const googleSignIn = () => { // Google sign in
+        firebase.auth().signInWithPopup(googleProvider).then((result) => {
+            setUserData(result);
+        }).catch(function (error) {
+            setError(error.message);
+        });
+    }
+    const setUserData = (result) => { // Set logged user data and redirect for google, facebook and github
+        // console.log(result)
+        // const user = { ...newUser };
+        // user.isSignIn = true;
+        // user.firstName = result.user.displayName;
+        // user.email = result.user.email;
+        // user.img = result.user.photoURL;
+        setLoggedInUser(result.user);
+        history.replace(from);
+    }
     
     const handleSubmit = (e) => {
         if (!isUser && newUser.email && newUser.password && newUser.confirmPassword) {
@@ -83,8 +103,8 @@ const Login = () => {
                 setError('Password have at least one digit with five character long.');
             }
         }
-        if(e.target.name === 'confirmPassword') {    
-            console.log(e.target.name); 
+        if (e.target.name === 'confirmPassword') {
+            console.log(e.target.name);
             setConfirmPassword(e.target.value);
             if (password === confirmPassword) {
                 isValidForm = true;
@@ -99,7 +119,7 @@ const Login = () => {
             const user = { ...newUser };
             user[e.target.name] = e.target.value;
             setNewUser(user);
-        } 
+        }
     }
     const handleAccount = () => {
         setIsUser(false);
@@ -117,8 +137,25 @@ const Login = () => {
                             <input name="email" onBlur={handleBlur} className="form-control m-3" required type="email" placeholder="Email" />
                             <input name="password" onBlur={handleBlur} className="form-control m-3" required type="password" placeholder="Password" />
                             <button type="submit" className="btn login-btn form-control m-3" >Log In</button>
+                            {
+                                isUser ? <p className="text-center mt-2 text-danger" onClick={handleAccount} style={{ cursor: 'pointer' }}>Don't have an account? Sign up</p>
+                                    : <p className="text-center mt-2 text-danger" onClick={() => setIsUser(true)} style={{ cursor: 'pointer' }}>Already have an account?</p>
+                            }
+                            <div className="login-form-social">
+                                <div className="d-flex" >
+                                    <hr className="w-50 ml-4 mr-1" />Or<hr className="w-50 ml-1" />
+                                </div>
+                                <div className="form-control social-btn ml-3 m-2"  >
+                                    <div className="d-flex" onClick={googleSignIn}>
+                                        <div className="text-left mr-5">
+                                            <img src="https://i.ibb.co/QcGGmpK/google.png" alt="facebook" className="img img-fluid social-img text-left" />
+                                        </div>
+                                        <div className="ml-5"> Continue with Google</div>
+                                    </div>
+                                </div>
+                            </div>
                         </form>
-                            : <form className="mt-3 login-form" onSubmit={handleSubmit} >
+                            : <div> <form className="mt-3 login-form" onSubmit={handleSubmit} >
                                 {error && <p className="alert alert-danger m-3">{error}</p>}
                                 <input name="name" onBlur={handleBlur} className="form-control m-3" required type="name" placeholder="Name" />
                                 <input name="email" onBlur={handleBlur} className="form-control m-3" required type="email" placeholder="Email" />
@@ -126,11 +163,12 @@ const Login = () => {
                                 <input name="confirmPassword" onBlur={handleBlur} onChange={handleBlur} className="form-control m-3" required type="password" placeholder="Confirm Password" />
                                 <button type="submit" className="btn login-btn form-control ml-3" >Sign Up</button>
                             </form>
+                                {
+                                    isUser ? <p className="text-center mt-2 text-danger" onClick={handleAccount} style={{ cursor: 'pointer' }}>Don't have an account? Sign up</p>
+                                        : <p className="text-center mt-2 text-danger" onClick={() => setIsUser(true)} style={{ cursor: 'pointer' }}>Already have an account? Login</p>
+                                }</div>
                     }
-                    {
-                        isUser ? <p className="text-center mt-2 text-danger" onClick={handleAccount} style={{ cursor: 'pointer' }}>Don't have an account? Sign up</p>
-                            : <p className="text-center mt-2 text-danger" onClick={() => setIsUser(true)} style={{ cursor: 'pointer' }}>Already have an account?</p>
-                    }
+
                 </div>
             </div>
         </div>

@@ -5,6 +5,7 @@ import FoodItem from '../FoodItem/FoodItem';
 import { OnionContext } from '../../App';
 import WhyChoose from '../WhyChoose/WhyChoose';
 import Footer from '../Footer/Footer';
+import './Menu.css';
 
 
 const Menu = () => {
@@ -23,9 +24,9 @@ const Menu = () => {
         <div >
             <div className="container text-center mt-5">
                 <nav>
-                    <button className="btn btn-link mr-3" onClick={() => setCategory('BREAKFAST')}>Breakfast</button>
-                    <button className="btn btn-link mr-3" onClick={() => setCategory('LUNCH')}>Lunch</button>
-                    <button className="btn btn-link mr-3" onClick={() => setCategory('DINNER')}>Dinner</button>
+                    <button className={category === 'BREAKFAST' ? 'btn btn-ctg mr-3 menu-btn' : 'btn btn-ctg'} onClick={() => setCategory('BREAKFAST')}>Breakfast</button>
+                    <button className={category === 'LUNCH' ? 'btn btn-ctg mr-3 menu-btn' : 'btn btn-ctg'} onClick={() => setCategory('LUNCH')}>Lunch</button>
+                    <button className={category === 'DINNER' ? 'btn btn-ctg mr-3 menu-btn' : 'btn btn-ctg'} onClick={() => setCategory('DINNER')}>Dinner</button>
                 </nav>
                 <div className="mt-4">
                     {
@@ -39,8 +40,8 @@ const Menu = () => {
                     }
                 </div>
                 <WhyChoose />
-            </div>        
-            <Footer/>
+            </div>
+            <Footer />
         </div>
     );
 };

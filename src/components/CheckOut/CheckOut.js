@@ -16,7 +16,7 @@ const CheckOut = () => {
     const [instructor, setInstructor] = useState('');
 
     const handleSubmit = (e) => {
-        console.log(deliveryAddress);
+        //console.log(deliveryAddress);
         setAddress(deliveryAddress.address);
         setRoad(deliveryAddress.road);
         setFloor(deliveryAddress.floor);
@@ -37,11 +37,11 @@ const CheckOut = () => {
                         <form onSubmit={handleSubmit}>
                             <h5 className="m-3">Edit Delivery Details</h5>
                             <hr className="m-3" />
-                            <input name="address" className="form-control m-3" onBlur={handleBlur} type="text" placeholder="Delivery To Door" />
-                            <input name="road" className="form-control m-3" onBlur={handleBlur} type="text" placeholder="107 Road no 8" />
-                            <input name="floor" className="form-control m-3" onBlur={handleBlur} type="text" placeholder="flat or floor" />
-                            <input name="business" className="form-control m-3" onBlur={handleBlur} type="text" placeholder="business name" />
-                            <input name="instructor" className="form-control m-3" onBlur={handleBlur} type="text" placeholder="add delivery instructor" />
+                            <input name="address" className="form-control m-3" onBlur={handleBlur} type="text" placeholder="Delivery To Door" required />
+                            <input name="road" className="form-control m-3" onBlur={handleBlur} type="text" placeholder="107 Road no 8" required />
+                            <input name="floor" className="form-control m-3" onBlur={handleBlur} type="text" placeholder="flat or floor" required />
+                            <input name="business" className="form-control m-3" onBlur={handleBlur} type="text" placeholder="business name" required />
+                            <input name="instructor" className="form-control m-3" onBlur={handleBlur} type="text" placeholder="add delivery instructor" required />
                             <button type="submit" className="btn btn-danger ml-3 save" >Save & Continue</button>
                         </form>
                     </div>

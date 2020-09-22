@@ -1,13 +1,18 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { OnionContext } from '../../App';
+import './Navbar.css';
 
 const Navbar = () => {
-    const { user } = useContext(OnionContext);
+    const { user, cartItem } = useContext(OnionContext);
     const [loggedInUser, setLoggedInUser] = user;
+    const [cart, setCart] = cartItem;
+
     const handleLogout = () => {
         setLoggedInUser({});
+        setCart([]);
     }
+    
     return (
         <div className="container mt-1 p-1">
             <div className="row">
@@ -24,12 +29,12 @@ const Navbar = () => {
                     {
                         loggedInUser.email ? <button className="btn btn-link ml-3" onClick={handleLogout} style={{ textDecoration: 'none', color: 'black' }}>
                             {loggedInUser.displayName}[Logout]</button>
-                            : <Link to="/login" > <button className="btn btn-link ml-3" style={{ textDecoration: 'none', color: 'black' }}>Login</button> </Link>
+                            : <Link to="/login" > <button className="btn btn-link ml-3 " style={{ textDecoration: 'none', color: 'black' }}>Login</button> </Link>
                     }
                     { 
                         loggedInUser.email ? ''
                             : <Link to="/signup">
-                                <button className="btn btn-danger my-2 ml-3" style={{ borderRadius: '30px', width: '120px' }}>SignUp</button>
+                                <button className="btn btn-danger my-2 ml-3" style={{ borderRadius: '30px', width: '120px' }}>Sign Up</button>
                             </Link>
                     }
                    
